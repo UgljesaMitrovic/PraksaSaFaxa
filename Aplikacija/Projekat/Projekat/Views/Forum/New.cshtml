@@ -1,0 +1,17 @@
+﻿@model Projekat.Models.Post
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Definiši novu temu</h2>
+
+@using (Html.BeginForm("CreatePost", "Forum"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Tekst)
+        @Html.TextBoxFor(m => m.Tekst, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-success" id="btn">Postavi</button>
+}

@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Početna";
+}
+@using Microsoft.AspNet.Identity;
+@*
+    <div class="jumbotron">
+        <div class="naziv">
+            <img src="~/Images/logo.png" alt="Logo" />
+        </div>
+    </div>*@
+
+<style>
+
+    /* Make the image fully responsive */
+    .carousel-inner img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+
+@{ if (User.Identity.GetUserId() == null)
+    {
+
+        <div id="demo" class="carousel slide" data-ride="carousel">
+            <!--Glavna slika ako korisnik još uvek nije registrovan-->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/Images/slika1.jpg" alt="Na pravom ste mestu!">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="display-4">U potrazi ste za stručnom praksom? <br /> Na pravom ste mestu!</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!--Registracija studenata-->
+        <div class="row">
+            <div class="col-md-7">
+                <img class="img-fluid rounded mb-3 mb-md-0" src="~/Images/laptop.jpg" alt="">
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <h2>Pronađi stručnu praksu po svojoj meri!</h2>
+                <a class="btn btn-success" href="../Account/RegisterStudent">Registruj se kao student!</a>
+            </div>
+        </div>
+
+
+        <hr>
+
+        <!--Registracija firmi-->
+
+        <div class="row">
+            <div class="col-md-7">
+                <img class="img-fluid rounded mb-3 mb-md-0" src="~/Images/meeting.jpg" alt="">
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <h2>Neka Vaš oglas vide svi!</h2>
+                <a class="btn btn-success" href="../Account/RegisterFirma">Registrujte Vašu firmu na našem sajtu!</a>
+            </div>
+        </div>
+    }
+
+    else
+    {
+        <div id="demo" class="carousel slide" data-ride="carousel">
+            <!--Glavna slika ako korisnik još uvek nije registrovan-->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/Images/slika1.jpg" alt="Na pravom ste mestu!">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="display-4">Hvala Vam što ste postali deo Prakse sa faksa!<br /></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!--Registracija studenata-->
+        @*
+        <div class="row">
+            <div class="col-md-6">
+                <div class="naslov">
+                    <h2>Firme koje nude stručnu praksu</h2>
+                </div>
+                <a class="btn btn-default" href="./Firma/ViewAllAsStudent"><img src="~/Images/firma1.png" alt="Alternate Text" /></a>
+                <hr />
+            </div>
+
+            <div class="col-md-6">
+                <h2>Studenti registrovani na sajtu</h2>
+                <a class="btn btn-default" href="./Student/ViewAll"><img src="~/Images/student.png" alt="Alternate Text" /></a>
+                <hr />
+            </div>
+
+        </div>*@
+
+    }
+
+}
+
+<style>
+    .col-md-6, naslov{
+        display:flex;   
+        flex-direction: column;
+        justify-content:center;
+        align-content: center;
+    }
+    
+
+</style>

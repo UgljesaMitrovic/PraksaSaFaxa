@@ -1,0 +1,217 @@
+﻿@model Projekat.Models.Firma
+@{
+    ViewBag.Title = "ViewProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNet.Identity;
+
+
+
+<h2><b>Moj profil</b></h2>
+<hr />
+<br />
+
+
+@*<table id="oglasi" class="table">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h2>@Model.Ime - @Model.Grad</h2>
+            </div>
+        </div>
+        <tbody>
+            @foreach (var oglas in Model.Oglasi)
+            {
+                <div>
+                    <div class="flex">
+                        <h2>
+                            <a class="btn btn-default" href="">
+                                <h2>@oglas.Naslov</h2>
+                            </a>
+                        </h2>
+                        <h3>
+                            <div class="item-date text-muted text-sm d-none d-md-block">@oglas.OpisOglasa</div>
+
+
+                        </h3>
+                    </div>
+                </div>
+                <tr>
+                    <td><a href='@Url.Action("ViewSingle", "Oglas", new { id = oglas.Id })'>@oglas.Naslov</a></td>
+                    <td>@oglas.Tehnologije</td>
+                    <td>@oglas.DatumPostavljanja</td>
+                    @*treba da se doda kao detail za text oglasa koji ce da ti otvori ispod ili na novu stranu
+                </tr>
+            }
+        </tbody>
+    </table>*@
+
+<style>
+    a {
+        color: white;
+    }
+</style>
+
+<html>
+
+<body>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
+                <img src="~/Images/briefcase2.png" alt="" style="width:200px" />
+            </div>
+            <h1>@Model.Ime</h1>
+            <h2><img src="~/Images/pin2.jpg" style="height:30px" alt="Alternate Text" />@Model.Grad</h2>
+            <a class="btn btn-success" href='@Url.Action("New", "Oglas")'><h4> Kreirajte novi oglas </h4></a>
+
+        </div>
+        <div class="hidenn-xs" style="clear: both; height:40px"></div>
+
+
+        <div>
+            <hr />
+            <h2><b>Moji oglasi</b></h2>
+            <hr />
+            @if (Model.Oglasi.Count != 0)
+            {
+                <table class="table table-user-information">
+                    <thead>
+                        <tr>
+                            <th class=""><span>Naslov</span></th>
+                            <th class="text-center"><span>Opis oglasa</span></th>
+                            <th class="text-center"><span>Datum postavljanja</span></th>
+                            <th class="text-center"><span>Tehnologije</span></th>
+                            <th class="text-center"><span>Opcije</span></th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var oglas in Model.Oglasi)
+                        {
+                        <tr>
+                            <td class="">
+
+                                <a class="btn btn-default" href="/oglas/@oglas.Id"><h4>@oglas.Naslov</h4></a>
+
+                            </td>
+                            <td class="text-center">
+                                @oglas.OpisOglasa
+                            </td>
+                            <td class="text-center">
+                                @oglas.DatumPostavljanja.ToShortDateString()
+
+                            </td>
+                            <td class="text-center">
+                                @oglas.Tehnologije
+
+                            </td>
+                            <td class="text-center">
+                                @Html.ActionLink("Izmeni oglas", "EditOglas", "Firma", new { @class = "btn btn-info" })
+                                <div class="btn btn-danger">
+                                    <a href="/Oglas/delete/@oglas.Id">Obrisi</a>
+                                </div>
+                            </td>
+
+                        </tr>
+
+
+
+                        }
+                    </tbody>
+                </table>
+            }
+
+
+            else
+            {
+                <h2>
+                    <div class="card bg-danger text-white">
+                        <div class="btn-danger">Trenutno nemate aktivnih oglasa za stručne prakse.</div>
+                    </div>
+                </h2>
+                <div class="hidenn-xs" style="clear: both; height:50px"></div>
+
+
+            }
+        </div>
+
+
+
+
+        @*@Html.ActionLink("Obrisi", "Delete", "Oglas", new { id = oglas.Id }, null)*@
+
+
+        <hr />
+
+
+        <h2><b>Prijave studenata za rad u firmi</b></h2>
+        <hr />
+        @if (Model.Prijave.Count() != 0)
+        {
+
+            foreach (var prijava in Model.Prijave)
+            {
+                if (prijava.FirmaId == Model.Id)
+                {
+                    <div class="student">
+                        <img src="~/Images/usernew.png" style="width : 50px; height:50px" alt="">
+
+                        <p>
+                            <div>
+                                <a class="btn btn-default" href="/Student/ViewProfileAsGuest/@prijava.StudentId"><h4>@prijava.Student.Ime @prijava.Student.Prezime</h4></a>
+
+
+                                <a class="btn btn-success btn-sm"
+                                   href='@Url.Action("PrihvatiStudenta", "Student", new { firmaId = prijava.FirmaId, studentId = prijava.StudentId })'>
+                                    <h4>Prihvati</h4>
+                                </a>
+                                <a class="btn btn-danger btn-sm"
+                                   href='@Url.Action("OdbijStudenta", "Student", new { firmaId = prijava.FirmaId, studentId = prijava.StudentId })'>
+                                    <h4>Odbij</h4>
+                                </a>
+                            </div>
+
+                            @*@Html.ActionLink(@prijava.Student.Ime + " " + @prijava.Student.Prezime, "ViewProfileAsGuest", "Student", new { id = prijava.StudentId }, null)*@
+
+                        </p>
+                    </div>
+                }
+
+            }
+        }
+        else
+        {
+            <h2>
+                <div class="card bg-danger text-white">
+                    <div class="btn-danger">Trenutno nema prijavljenih studenata.</div>
+                </div>
+            </h2>
+        }
+        <div class="hidenn-xs" style="clear: both; height:50px"></div>
+
+        <style>
+
+            .naslovna {
+                flex-direction: column;
+                display: flex;
+            }
+
+            .oglasDiv {
+                border: 1px solid black;
+            }
+
+            .naslov {
+                border-bottom: 1px solid black;
+            }
+        </style>
+</body>
+</html>
+
+<style>
+    .student{
+        display: flex;
+        flex-direction:row;
+        width: 100%;
+        align-content: space-around;
+    }
+</style>

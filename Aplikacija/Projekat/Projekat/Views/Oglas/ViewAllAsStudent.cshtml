@@ -1,0 +1,99 @@
+﻿@model Projekat.ViewModels.OglasViewModel
+@{
+    ViewBag.Title = "ViewAllAsStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNet.Identity;
+<h2 class="centrirano"><b>Svi oglasi objavljeni na sajtu</b></h2>
+<br />
+
+<style>
+    .centrirano{
+        display:flex;       
+        justify-content: center;
+
+    }
+</style>
+
+<table id="oglasi" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Naslov</th>
+            <th>Lokacija</th>
+            <th>Firma</th>
+            <th>Datum postavljanja</th>
+            <th>Potrebne tehnologije</th>
+            <th>Opcije</th>
+            <th class="text-hide">Opcije</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var oglas in Model.Oglasi)
+        {
+        <tr>
+
+            @*<td>@Html.ActionLink(oglas.Naslov, "ViewSingle", "Oglas", new { id = @oglas.Id })</td>*@
+            <td><a href="oglas/@oglas.Id" class="btn btn-default">@oglas.Naslov</a></td>
+            <td>@oglas.Firma.Grad</td>
+            <td>@oglas.Firma.Ime</td>
+            <td>@oglas.DatumPostavljanja</td>
+            <td>@oglas.Tehnologije</td>
+            <td>
+                @Html.ActionLink("Otvori", "OtvoriDetalje", "Oglas", new { id = @oglas.Id }, null)
+                @Html.ActionLink("Zatvori", "ZatvoriDetalje", "Oglas", new { id = @oglas.Id }, null)
+            </td>
+            <td>
+                @{
+                    bool flag = false;
+                    foreach (var studentToOglas in oglas.StudentToOglasi)
+                    {
+                        if (User.Identity.GetUserId() == studentToOglas.Student.IdUser)
+                        {
+                            flag = true;
+                        }
+                    }
+                    if (!flag)
+                    {
+
+                        <a class="btn btn-success btn-sm" href='@Url.Action("SacuvajOglas", "Oglas", new { id = @oglas.Id })'>Sačuvaj</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-default btn-sm" >Oglas sačuvan</a>
+
+                    }
+
+                }
+            </td>
+        </tr>
+            if (oglas.Potvrdjen)
+            {
+                <tr><td colspan="6" style="background-color:#9bb5f3">@oglas.OpisOglasa</td></tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (Model.UlogovanaFirma == true)
+{
+    <a class="btn btn-primary" href='@Url.Action("New", "Oglas")'>Dodaj oglas</a>
+}
+
+<script>
+    //const table = $("td");
+    //table.each((index, item) => {
+    //    item.innerHTML = "Djole" + index;
+    //    console.log(item, index);
+    //});
+
+    $("#oglasi").DataTable();
+
+    if (@ViewBag.ShowModal == 1) {
+        $(".modal-title")[0].innerHTML = "Obaveštenje";
+        $(".modal-body")[0].innerHTML = "Vaš oglas je postavljen";
+
+        $("#myModal").modal();
+    }
+
+</script>

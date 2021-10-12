@@ -1,0 +1,69 @@
+﻿@model Projekat.ViewModels.OglasViewModel
+@{
+    ViewBag.Title = "ViewAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="centrirano">Trenutno aktivni oglasi</h2>
+<br />
+
+<style>
+    .centrirano {
+        display: flex;
+        justify-content: center;
+    }
+ </style>   
+
+<table id="oglasi" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Naslov</th>
+            <th>Lokacija</th>
+            <th>Firma</th>
+            <th>Datum postavljanja</th>
+            <th>Potrebne tehnologije</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var oglas in Model.Oglasi)
+        {
+        <tr>
+            <td><a href="oglas/@oglas.Id">@oglas.Naslov</a></td>
+            <td>@oglas.Firma.Grad</td>
+            <td>@oglas.Firma.Ime</td>
+            <td>@oglas.DatumPostavljanja</td>
+            <td>@oglas.Tehnologije</td>
+            <td>
+                @Html.ActionLink("Otvori", "OtvoriDetalje", "Oglas", new { id = @oglas.Id }, null)
+                @Html.ActionLink("Zatvori", "ZatvoriDetalje", "Oglas", new { id = @oglas.Id }, null)
+            </td>
+        </tr>
+            if(oglas.Potvrdjen)
+            {
+                <tr><td colspan="6" style="background-color:#9bb5f3">@oglas.OpisOglasa</td></tr>
+            }
+        }
+    </tbody>
+</table>
+@if (Model.UlogovanaFirma == true)
+{
+<a class="btn btn-primary" href='@Url.Action("New", "Oglas")'>Dodaj oglas</a>
+}
+
+<script>
+    //const table = $("td");
+    //table.each((index, item) => {
+    //    item.innerHTML = "Djole" + index;
+    //    console.log(item, index);
+    //});
+
+    $("#oglasi").DataTable();
+
+    if (@ViewBag.ShowModal == 1) { // sta je ovo kockare?
+        $(".modal-title")[0].innerHTML = "Obaveštenje";
+        $(".modal-body")[0].innerHTML = "Vaš oglas je postavljen";
+
+        $("#myModal").modal();
+    }
+
+</script>

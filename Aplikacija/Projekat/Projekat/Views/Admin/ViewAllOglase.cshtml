@@ -1,0 +1,49 @@
+﻿@model Projekat.ViewModels.OglasViewModel
+@{
+    ViewBag.Title = "ViewAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Oglasi</h2>
+<br />
+
+<table id="oglasi" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Naslov</th>
+            <th>Firma</th>
+            <th>Datum postavljanja</th>
+            <th>Potrebne tehnologije</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var oglas in Model.Oglasi)
+        {
+        <tr>
+            <td><a href="/oglas/@oglas.Id">@oglas.Naslov</a></td>
+            <td>@oglas.Firma</td>
+            <td>@oglas.DatumPostavljanja</td>
+            <td>@oglas.Tehnologije</td>
+            <td>@Html.ActionLink("Obrisi", "ObrisiOglas", "Admin", new { id = @oglas.Id }, null)</td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    //const table = $("td");
+    //table.each((index, item) => {
+    //    item.innerHTML = "Djole" + index;
+    //    console.log(item, index);
+    //});
+
+    $("#oglasi").DataTable();
+
+    if (@ViewBag.ShowModal == 1) { //Kocakre sta je ovo?
+        $(".modal-title")[0].innerHTML = "Obaveštenje";
+        $(".modal-body")[0].innerHTML = "Vaš oglas će biti postavljen nakon provere administratora";
+
+        $("#myModal").modal();
+    }
+</script>

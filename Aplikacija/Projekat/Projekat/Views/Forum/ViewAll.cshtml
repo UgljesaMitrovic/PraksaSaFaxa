@@ -1,0 +1,87 @@
+﻿@model Projekat.ViewModels.PostViewModel
+@{
+    ViewBag.Title = "Posts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*
+    <table id="oglasi" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Tekst</th>
+                <th>Datum postavljanja</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var post in Model.Postovi)
+            {
+                <tr>
+                    <td><a href="post/@post.Id">@post.Tekst</a></td>
+                    <td>@post.Datum</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+*@
+
+<style>
+
+    /* Make the image fully responsive */
+    .carousel-inner img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+
+
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/Images/forum.jpg" alt="Forum">
+            <div class="carousel-caption d-none d-md-block">
+                <h1 class="display-2">Dobro došli na studentski forum!<br /> Razmenite iskustva sa ostalim praktikantima!<br />   <br /> </h1>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="list list-row block">
+                    @foreach (var post in Model.Postovi)
+                    {
+                        <div>
+                            <div class="flex">
+                                <h2>
+                                    <a class="btn btn-default" href="post/@post.Id">
+                                        <h2>@post.Tekst</h2>
+                                    </a>
+                                </h2>
+                                <h3>
+                                    <div class="item-date text-muted text-sm d-none d-md-block">Poslednja aktivnost na dan: @post.Datum.ToShortDateString() </div>
+                                    <hr />
+
+                                </h3>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-sm-6">
+                @if (!User.IsInRole("Admin"))
+                {
+                <h2>
+                    Nema teme koju tražiš?
+                    <a class="btn btn-success" href="./Forum/New"><h2>Kreiraj novu temu!</h2></a>
+                    <a href="" class="item-author text-color" data-abc="true"></a>
+                </h2>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,172 @@
+﻿@model Projekat.ViewModels.StudentViewModel
+@{
+    ViewBag.Title = "Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="centrirano">
+    <h2><b>Studenti registrovani na sajtu</b></h2>
+</div>
+<style>
+    .centrirano {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+@*
+    <div class="centrirano">
+            <h2>Svi studenti registrovani na sajtu</h2>
+        </div>
+
+        <style>
+            .centrirano {
+                display: flex;
+                justify-content: center;
+            }
+            .slikaime{
+                display: flex;
+                justify-content: flex-start;
+            }
+
+            .ostudentu{
+                display: flex;
+                flex-direction:column;
+            }
+        </style>
+
+        <h2>Lista studenata</h2>
+            <table class="table">
+                <thead>
+
+                </thead>
+                <tbody>
+                    @foreach (var student in Model.Studenti)
+                    {
+                        <tr>
+                            <td>@student.Ime</td>
+                            <td>@student.Prezime</td>
+                            <td>@Html.ActionLink("Detalji", "ViewProfileAsGuest", "Student", new { id = @student.Id }, null)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <a class="btn btn-primary" href='@Url.Action("New", "Oglas")'>Nova tema</a>
+
+
+        @foreach (var student in Model.Studenti)
+        {
+
+            <div>
+                <div class="slikaime">
+                    <img src="~/Images/usernew.png" alt="" style="width = "40px"" height="40px"/>
+                    <div class="ostudentu">
+                        <h3>@student.Ime @student.Prezime</h3>
+                        <p>@student.Grad</p>
+                        <h3>@student.Fakultet</h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr>
+        }
+*@
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<hr>
+<table class="table user-list">
+    <thead>
+        <tr>
+            <th class="text-hide"><span>Student</span></th>
+            <th><span>Student</span></th>
+            <th class="text-center"><span>Grad</span></th>
+            <th class="text-center"><span>Fakultet</span></th>
+            <th class="text-center"><span>Prosek</span></th>
+            <th class="text-center"><span>Email</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model.Studenti)
+        {
+            <tr class="tabelaBody">
+                <td>
+                    <img src="~/Images/usernew.png" style="width : 50px; height:50px" alt="">
+
+                </td>
+                <td class="ime">
+                    @*
+        <img src="~/Images/usernew.png" style="width : 70px; height:70px" alt="">
+        <div >
+            <a class="btn btn-default" width:100%" href="/Student/ViewProfileAsGuest/@student.Id">
+                <div class="hidenn-xs" style="clear: both; height:10px"></div>
+
+                <div class="col-lg-12" style="align-content:baseline">
+                    <h4>@student.Ime @student.Prezime</h4>
+
+                </div>
+                <div class="hidenn-xs" style="clear: both; height:20px"></div>
+            </a>
+
+        </div>*@
+
+                                @*<h2>
+
+                        <a class="btn btn-default" href="/Student/ViewProfileAsGuest/@student.Id" style="width:100%">
+
+                            <h4>@student.Ime @student.Prezime</h4>
+                            <img src="~/Images/usernew.png" style="width : 70px; height:70px" alt="">
+
+                        </a>
+                    </h2>*@
+                                @*<a href="/Student/ViewProfileAsGuest/@student.Id">@student.Ime @student.Prezime</a>*@
+
+                                <div >
+
+                                    <p>
+                                        <div>
+                                            <a class="btn btn-default" href="/Student/ViewProfileAsGuest/@student.Id"><h4>@student.Ime @student.Prezime</h4></a>
+
+
+                                        </div>
+
+                                        @*@Html.ActionLink(@prijava.Student.Ime + " " + @prijava.Student.Prezime, "ViewProfileAsGuest", "Student", new { id = prijava.StudentId }, null)*@
+
+                                    </p>
+                                </div>
+                            </td>
+
+                <td class="text-center">
+                    <h4>@student.Grad</h4>
+                </td>
+                <td class="text-center">
+                    <h4>@student.Fakultet</h4>
+
+                </td>
+                <td class="text-center">
+                    <h4>@student.Prosek</h4>
+
+                </td>
+                <td class="text-center">
+                    <h4>@student.Email</h4>
+                </td>
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+
+<style>
+    .ime, sve {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        align-items: baseline;
+    }
+
+    .tabelaBody {
+        align-items: baseline;
+    }
+</style>
+

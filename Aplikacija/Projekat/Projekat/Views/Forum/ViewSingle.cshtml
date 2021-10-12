@@ -1,0 +1,75 @@
+﻿@model Projekat.Models.Post
+@{
+    ViewBag.Title = "ViewSingle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNet.Identity;
+
+<h3 class="centrirano">
+    <b>
+        @Model.Tekst
+    </b>
+</h3>
+
+<style>
+    .centrirano {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<div>
+    @foreach (var odgovor in Model.Odgovori)
+    {
+        <hr />
+        <div class="red">
+            <div>
+                <img src="~/Images/usernew.png" alt="." style="width:70px; height:70px">
+            </div>
+            <div>
+                <h4>
+                    <a href="/Student/ViewProfileAsGuest/@odgovor.Student.Id" class="item-author text-color" data-abc="true">@odgovor.Student.Ime @odgovor.Student.Prezime</a>
+                </h4>
+                <h4>
+                    <div class="item-except text-muted text-sm h-1x">@odgovor.Tekst</div>
+                </h4>
+                <h4>
+                    <div class="item-date text-muted text-sm d-none d-md-block" style="max-width:100px">@odgovor.Datum.ToShortDateString()</div>
+                </h4>
+            </div>
+            <div>
+            </div>
+        </div>
+
+    }
+</div>
+<hr />
+
+@if (!User.IsInRole("Admin"))
+{
+    <h3>Ostavite komentar:</h3>
+    using (Html.BeginForm("CreateOdgovor", "Forum"))
+    {
+        <div class="form-group">          
+            @Html.TextAreaFor(o => o.Tekst, new { @class = "form-control", @placeholder = "Unesite komentar..", @id = "tekst" })
+        </div>
+        <button type="submit" class="btn btn-success" id="btn" value="@Model.Id" name="postId">Posalji</button>
+    }
+}
+<script>
+    $("#tekst")[0].innerHTML = "";
+
+    if (@ViewBag.ShowModal == 1) { // sta je ovo kockare?
+    $(".modal-title")[0].innerHTML = "Obaveštenje";
+    $(".modal-body")[0].innerHTML = "Vaš odgovor je postavljen";
+
+    $("#myModal").modal();
+    }
+</script>
+
+<style>
+    .red {
+        display: flex;
+        flex-direction: row;
+    }
+</style>

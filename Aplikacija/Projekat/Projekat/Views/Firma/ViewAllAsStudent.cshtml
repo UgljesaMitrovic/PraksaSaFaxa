@@ -1,0 +1,100 @@
+﻿@model Projekat.ViewModels.FirmaViewModel
+
+
+@{
+    ViewBag.Title = "Firma";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNet.Identity;
+
+    <div class="centrirano">
+        <h2><b>Firme koje nude stručnu praksu</b></h2>
+    </div>
+
+    <style>
+        .centrirano {
+            display: flex;
+            justify-content: center;
+        }
+
+        .firmaDiv {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            width: 300px;
+            height: 300px;
+            flex: 1; /* additionally, equal width */
+            padding: 1em;
+            flex-wrap: wrap;
+        }
+
+        .sveFirme {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .firmaDugme {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 1em;
+            flex: 1;
+        }
+    </style>
+    <div class="sveFirme">
+        @foreach (var firma in Model.Firme)
+        {
+        <div class="firmaDugme">
+
+
+            <h3 class="firmaDiv">
+
+                <a class="btn" href="/Firma/ViewProfileAsGuest/@firma.Id">
+                    <img src="~/Images/briefcase2.png" alt="" style="width:50px" />
+
+                    <h2>@firma.Ime</h2>
+                    <div class="item-date text-muted text-sm d-none d-md-block">Grad: @firma.Grad</div>
+
+                </a>
+            </h3>
+            @{
+                bool flag = false;
+                foreach (var prijava in firma.Prijave)
+                {
+                    if (User.Identity.GetUserId() == prijava.Student.IdUser)
+                    {
+                        flag = true;
+                    }
+                }
+                if (!flag)
+                {
+
+                    <a class="btn btn-success" href='@Url.Action("PrijaviSeUFirmu", "Firma", new { id = firma.Id })' style="width:30%; margin-left:40px">Apliciraj</a>
+                }
+
+            }
+        </div>
+         }
+    </div>
+
+
+
+
+
+    @*<div class="row">
+            <div class="col-md-7">
+                <img src="~/Images/briefcase.jpg" alt="" style="width:50px" />
+            </div>
+            <h2>@firma.Ime</h2>
+
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <h2>@firma.Grad</h2>
+                @Html.ActionLink("Oglasi", "ViewProfileAsGuest", "Firma", new { id = @firma.Id }, new { @class = "btn btn-success" })
+            </div>
+        </div>*@
+
+
+

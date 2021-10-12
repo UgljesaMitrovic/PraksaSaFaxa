@@ -1,0 +1,61 @@
+﻿@model Projekat.Models.Oglas
+@{
+    ViewBag.Title = "ViewSingle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNet.Identity;
+
+
+@*
+    <div class="info">
+        <div style="margin-right: 20px">
+            <label>Firma </label>
+
+            <p>@Html.ActionLink(Model.Firma.Ime, "ViewProfileAsGuest", "Firma", new { id = Model.Firma.Id }, null)</p>
+        </div>
+
+        <div style="position:absolute;right:50%">
+            <label>Datum postavljanja </label>
+            <p>@Model.DatumPostavljanja</p>
+        </div>
+    </div>
+    <label>Opis </label>
+    <p>@Model.OpisOglasa</p>
+
+    <label>Potrebne tehnologije </label>
+    <p>@Model.Tehnologije</p>*@
+
+<html>
+
+<body>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
+                <img src="~/Images/business.png" alt="" style="width:200px" />
+            </div>
+            <h1>@Model.Naslov</h1>
+            <h2><img src="~/Images/briefcase2.png" style="height:30px" alt="Alternate Text" /><a href="/Firma/ViewProfileAsGuest/@Model.Firma.Id">@Model.Firma.Ime</a></h2>
+            <h2><img src="~/Images/pin2.jpg" style="height:30px" alt="Alternate Text" />@Model.Firma.Grad</h2>
+            <div class="hidenn-xs" style="clear: both; height:10px"></div>
+            <div class="podatak">
+                <div class="item-date text-muted text-sm d-none d-md-block"><h2>Opis oglasa: </h2></div>
+                <h2>@Model.OpisOglasa</h2>
+            </div>
+            <div class="podatak">
+                <div class="item-date text-muted text-sm d-none d-md-block"><h2>Datum postavljanja oglasa: </h2></div>
+                <h2>@Model.DatumPostavljanja.ToShortDateString()</h2>
+            </div>
+            <div class="podatak">
+                <div class="item-date text-muted text-sm d-none d-md-block"><h2>Potrebne tehnologije: </h2></div>
+                <h2>@Model.Tehnologije</h2>
+            </div>
+        </div>
+</body>
+</html>
+
+<style>
+    .podatak {
+        display: flex;
+        flex-direction: row;
+    }
+</style>

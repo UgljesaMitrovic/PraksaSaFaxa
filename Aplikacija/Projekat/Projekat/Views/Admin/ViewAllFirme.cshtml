@@ -1,0 +1,25 @@
+﻿@model Projekat.ViewModels.FirmaViewModel
+
+
+@{
+    ViewBag.Title = "Firma";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista svih firmi registrovanih na sajtu</h2>
+
+<table class="table">
+    <thead>
+
+    </thead>
+    <tbody>
+        @foreach (var firma in Model.Firme)
+        {
+        <tr>
+            <td><a href='@Url.Action("ViewProfileAsGuest", "Firma", new { id = firma.Id })'>@firma.Ime</a></td>
+            <td>@firma.Grad</td>
+            <td>@Html.ActionLink("Obrisi", "ObrisiFirmu", "Admin", new { id = @firma.Id }, null)</td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,45 @@
+﻿@model Projekat.Models.Student
+@{
+    ViewBag.Title = "ViewProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Moj profil</h2>
+
+@using (Html.BeginForm("Edit", "Student"))
+{
+    <div class="form-group">
+        @Html.LabelFor(x => x.Ime)
+        @Html.TextBoxFor(x => x.Ime, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Prezime)
+        @Html.TextBoxFor(x => x.Prezime, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Fakultet)
+        @Html.TextBoxFor(x => x.Fakultet, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Smer)
+        @Html.TextBoxFor(x => x.Smer, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.StepenStudija)
+        @Html.TextBoxFor(x => x.StepenStudija, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Prosek)
+        @Html.TextBoxFor(x => x.Prosek, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Grad)
+        @Html.TextBoxFor(x => x.Grad, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Tehnologije)
+        @Html.TextBoxFor(x => x.Tehnologije, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(x => x.Id)
+    <button type="submit" class="btn btn-success">Sacuvaj</button>
+}

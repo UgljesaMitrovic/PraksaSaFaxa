@@ -1,0 +1,52 @@
+﻿@model Projekat.Models.Student
+@{
+    ViewBag.Title = "ViewProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+
+<body>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
+                <img src="~/Images/usernew.png" alt="" style="width:200px" />
+            </div>
+            <div class=" col-md-9 col-lg-9 hidden-xs hidden-sm">
+                <strong style="font-size:large">Profil</strong><br>
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <td>Ime i prezime:</td>
+                            <td>@Model.Ime @Model.Prezime</td>
+                        </tr>
+                        <tr>
+                            <td>Fakultet:</td>
+                            <td>@Model.Fakultet</td>
+                        </tr>
+                        <tr>
+                            <td>Smer:</td>
+                            <td>@Model.Smer</td>
+                        </tr>
+                        <tr>
+                            <td>Stepen studija:</td>
+                            <td>@Model.StepenStudija</td>
+                        </tr>
+                        <tr>
+                            <td>Prosek</td>
+                            <td>@Model.Prosek</td>
+                        </tr>
+                        <tr>
+                            <td>Grad:</td>
+                            <td>@Model.Grad</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>@Model.Email</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

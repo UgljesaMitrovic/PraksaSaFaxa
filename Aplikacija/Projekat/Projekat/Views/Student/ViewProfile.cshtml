@@ -1,0 +1,155 @@
+﻿@model Projekat.Models.Student
+@{
+    ViewBag.Title = "ViewProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+
+<body>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm" style="">
+                <img src="~/Images/usernew.png" alt="" style="width:200px" />
+                <a class="btn btn-success" style="margin-left:47px" href='@Url.Action("EditProfile", "Student")'>Izmeni profil</a>
+            </div>
+            <div class=" col-md-9 col-lg-9 hidden-xs hidden-sm">
+                <strong style="font-size:large">Profil</strong><br>
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <td>Ime i prezime:</td>
+                            <td>@Model.Ime @Model.Prezime</td>
+                        </tr>
+                        <tr>
+                            <td>Fakultet:</td>
+                            <td>@Model.Fakultet</td>
+                        </tr>
+                        <tr>
+                            <td>Smer:</td>
+                            <td>@Model.Smer</td>
+                        </tr>
+                        <tr>
+                            <td>Stepen studija:</td>
+                            <td>@Model.StepenStudija</td>
+                        </tr>
+                        <tr>
+                            <td>Prosek</td>
+                            <td>@Model.Prosek</td>
+                        </tr>
+                        <tr>
+                            <td>Grad:</td>
+                            <td>@Model.Grad</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>@Model.Email</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <h2><b>Pozivi na razgovor</b></h2>
+    <hr />
+    @if (Model.Pozivi.Count() != 0)
+    {
+        foreach (var poziv in Model.Pozivi)
+        {
+            if (poziv.StudentId == Model.Id)
+            {
+                <div class="firma">
+
+                    <h2>
+                        <img src="~/Images/briefcase2.png" style="width : 60px; height:60px" alt="">
+                        Firma <a class="btn btn-default" href="/Firma/ViewProfileAsGuest/@poziv.FirmaId"><h4>@poziv.Firma.Ime </h4></a> te poziva na razgovor!
+                        <a class="btn btn-danger" href='@Url.Action("IzbrisiPoziv", "Firma", new { firmaId = poziv.FirmaId, studentId = poziv.StudentId })'><h4>Odbij poziv</h4></a>
+                    </h2>
+
+                        <h4>
+
+                            
+                        </h4>
+
+                        @*@Html.ActionLink(@prijava.Student.Ime + " " + @prijava.Student.Prezime, "ViewProfileAsGuest", "Student", new { id = prijava.StudentId }, null)*@
+
+                </div>
+
+            }
+            <hr />
+
+        }
+    }
+    else
+    {
+        <h2>
+            <div class="card bg-danger text-white">
+                <div class="btn-danger">Nažalost, trenutno nemate poziva na razgovor.</div>
+            </div>
+        </h2>
+    }
+    <div class="hidenn-xs" style="clear: both; height:50px"></div>
+
+    <div>
+        <hr />
+        <h2><b>Izdvojeni oglasi</b></h2>
+        <hr />
+
+        @foreach (var studentToOglas in Model.StudentToOglasi)
+        {
+            if (studentToOglas.StudentId == Model.Id)
+            {
+
+                <div class="red">
+                    <a class="btn btn-default" href="/oglas/@studentToOglas.OglasId"><h4>@studentToOglas.Oglas.Naslov</h4></a>
+
+
+
+                    <a class="btn btn-danger btn-sm"
+                       href='@Url.Action("NeCuvajViseOglas", "Oglas", new { oglasId = studentToOglas.OglasId, studentId = studentToOglas.StudentId })'>
+                        x
+                    </a>
+
+                </div>
+            }
+
+        }
+        <div class="hidenn-xs" style="clear: both; height:50px"></div>
+
+        @*@foreach (var studentToOglas in Model.StudentToOglasi)
+            {
+                if (studentToOglas.StudentId == Model.Id)
+                {
+                    <p>
+                        @Html.ActionLink(@studentToOglas.Oglas.Naslov, "ViewSingle", "Oglas", new { id = studentToOglas.OglasId }, null)
+                        <a class="btn btn-danger btn-sm"
+                           href='@Url.Action("NeCuvajViseOglas", "Oglas", new { oglasId = studentToOglas.OglasId, studentId = studentToOglas.StudentId })'>
+                            x
+                        </a>
+                    </p>
+                }
+            }*@
+
+
+    </div>
+</body>
+</html>
+
+<style>
+    .red {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-content: space-around;
+        align-items: baseline;
+    }
+
+    .firma{
+        
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-content: space-around;
+    }
+</style>

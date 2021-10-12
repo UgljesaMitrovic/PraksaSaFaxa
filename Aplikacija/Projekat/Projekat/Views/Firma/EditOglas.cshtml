@@ -1,0 +1,30 @@
+﻿@model Projekat.Models.Firma
+@{
+    ViewBag.Title = "EditOglas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "Firma"))
+{
+
+    foreach (var oglas in Model.Oglasi.Select((value, i) => new { i, value }))
+    {
+        <div style="margin-top:10px; margin-bottom: 40px">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Oglasi[oglas.i].Naslov)
+                @Html.TextBoxFor(x => x.Oglasi[oglas.i].Naslov, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Oglasi[oglas.i].Tehnologije)
+                @Html.TextBoxFor(x => x.Oglasi[oglas.i].Tehnologije, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Oglasi[oglas.i].OpisOglasa)
+                @Html.TextAreaFor(x => x.Oglasi[oglas.i].OpisOglasa, new { @class = "form-control" })
+            </div>
+            
+        </div>
+    }
+    @Html.HiddenFor(x => x.Id)
+    <button type="submit" class="btn btn-success">Sacuvaj</button>
+}

@@ -1,0 +1,27 @@
+﻿@model Projekat.Models.Oglas
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2><b>Novi oglas</b></h2>
+<br />
+
+@using (Html.BeginForm("Create", "Oglas"))
+{
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.Naslov)
+        @Html.TextBoxFor(m => m.Naslov, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Tehnologije)
+        @Html.TextBoxFor(m => m.Tehnologije, new { @class = "form-control", @placeholder = "C, C++, C#, Java..."})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.OpisOglasa)
+        @Html.TextAreaFor(m => m.OpisOglasa, new { @class = "form-control"})
+    </div>
+    <button type="submit" class="btn btn-success" id="btn">Kreiraj oglas</button>
+
+}

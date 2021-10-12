@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "RegisterChose";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="sidebar niz">
+    </div>
+    <div class="naslov">
+        <div class="naslov">
+            <hr>
+
+            <h2>Registruj se kao:</h2>
+            <hr>
+
+        </div>
+        <div class="niz">
+            <div>
+                <a href="/Account/RegisterStudent">
+                    <img src="~/Images/student.png" alt="Student" />
+                </a>
+            </div>
+            <div>
+                <a href="/Account/RegisterFirma">
+                    <img src="~/Images/firma1.png" alt="Firma" />
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar niz">
+    </div>
+
+    <style>
+        .niz{
+            display:flex;
+            flex-direction:row;
+            justify-content: space-evenly;
+        }
+
+        .naslov{
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+        }
+
+        .slikadugme{
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+        }
+    </style>
+
